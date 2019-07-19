@@ -631,8 +631,8 @@ $(function() {
 
     function removeDrag(event) {
       console.log("removing ")
-      $("#brainbrowser").off("mousemove","#brainbrowser");
-      $("#brainbrowser").off("mouseup","#brainbrowser");
+      $("#brainbrowser").off("mousemove",click);
+      $("#brainbrowser").off("mouseup",removeDrag);
     }
 
 
