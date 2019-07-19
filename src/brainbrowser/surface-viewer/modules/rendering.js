@@ -1061,10 +1061,15 @@ BrainBrowser.SurfaceViewer.modules.rendering = function(viewer) {
     }
 
     canvas.addEventListener("mousedown", function(event) {
+      // if the ctrl key is down we shouldn't try to turn the model
+      if (event.ctrlKey) {
+        console.log("pressing mouse with ctrl key active")
+      } else {
       document.addEventListener("mousemove", mouseDrag, false);
       document.addEventListener("mouseup", mouseDragEnd, false);
 
       movement = event.which === 1 ? "rotate" : "translate" ;
+      }
     }, false);
 
     canvas.addEventListener("touchstart", function(event) {
