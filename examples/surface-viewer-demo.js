@@ -520,7 +520,7 @@ $(function() {
       setCenterRotation();
     });
 
-    $("#brainbrowser").click(function(event) {
+    function click(event) {
       if (!event.shiftKey && !event.ctrlKey) return;
       if (viewer.model.children.length === 0) return;
 
@@ -617,7 +617,24 @@ $(function() {
         $("#annotation-wrapper").hide();
       }
 
-    });
+    }
+    $("#brainbrowser").click(click);
+    // just add a second listener for the mouse down
+    $("#brainbrowser").mousedown(function(event) {
+      if (event.ctrlKey) {
+        // establish the drag 
+        console.log("starting mouse movement")
+        $("#brainbrowser").on("mousemove",click);
+        $("#brainbrowser").on("mouseup",removeDrag);
+      }
+    })
+
+    function removeDrag(event) {
+      console.log("removing ")
+      $("#brainbrowser").off("mousemove","#brainbrowser");
+      $("#brainbrowser").off("mouseup","#brainbrowser");
+    }
+
 
     function setCenterRotation() {
       var offset = viewer.model.userData.model_center_offset || new THREE.Vector3(0,0,0);
